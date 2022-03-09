@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+
+  mongodb:
+    image: mongo:5.0
+    hostname: mongodb
+    container_name: mongodb
+    restart: always
+    expose:
+      - 27017
+      - 37017
+    ports:
+      - "27017:27017"
+      - "37017:37017"
+    networks:
+      - default
+    healthcheck:
+      test: |
+        host=`hostname --ip-address || echo '127.0.0.1'`;
+        mongo --quiet $${host}/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
+      interval: 5s
+    logging:
+      driver: "none"
+
+  mongodb-seed:
+    image: mongo:5.0
+    hostname: mongodb-seed
+    container_name: mongodb-seed
+    networks:
+      - default
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - ./mongodb/data/:/data
+    command: /bin/bash -c "mongoimport  --host=mongodb -d exercises -c foo --file=/data/foo.json --jsonArray &&
+      mongorestore --host=mongodb -d exercises -c restaurants /data/restaurants.bson &&
+      mongorestore --host=mongodb -d exercises -c games /data/games.bson &&
+      mongorestore --host=mongodb -d exercises -c yelp-business /data/yelp-business.bson"

@@ -1,0 +1,21 @@
+name: "Build"
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.0.0
+      - uses: actions/setup-node@v3.0.0
+        with:
+          node-version: '17.3.0'
+      - name: Build Images
+        run: |
+          cd code
+          chmod +x *.sh
+          ./start.sh
+          ./stop.sh
