@@ -29,10 +29,4 @@ IF EXIST "NBA2016.json" (
     curl -o NBA2016.json http://big.csr.unibo.it/projects/nosql-datasets/NBA2016.json
 )
 
-cd ..\..\mysql\data
-IF EXIST "foodmart.sql" (
-  echo foodmart.sql exists
-) ELSE (
-  curl -o foodmart.sql http://big.csr.unibo.it/projects/nosql-datasets/foodmart.sql
-)
 cd ..\..

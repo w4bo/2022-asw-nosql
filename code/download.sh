@@ -27,10 +27,4 @@ else
     curl -o yelp-business.bson http://big.csr.unibo.it/projects/nosql-datasets/yelp-business.bson
 fi
 ls -las
-cd ../../mysql/data
-if test -f "foodmart.sql"; then
-    echo "foodmart.sql exists"
-else
-    curl -o foodmart.sql http://big.csr.unibo.it/projects/nosql-datasets/foodmart.sql
-fi
-cd ../../
+cd ../..
