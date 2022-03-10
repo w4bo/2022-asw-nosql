@@ -1,5 +1,7 @@
 # NoSQL in Action!
 
+https://github.com/w4bo/2022-sem-nosql
+
 NoSQL (Not Only SQL) exercises.
 
 ## Install
