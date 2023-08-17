@@ -2,7 +2,7 @@ version: "3.9"
 services:
 
   mongodb:
-    image: mongo:6.0
+    image: mongo:7.0
     hostname: mongodb
     container_name: mongodb
     restart: always
@@ -23,7 +23,7 @@ services:
       driver: "none"
 
   mongodb-seed:
-    image: mongo:6.0
+    image: mongo:7.0
     hostname: mongodb-seed
     container_name: mongodb-seed
     networks:
